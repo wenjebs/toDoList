@@ -84,7 +84,8 @@
     display: flex;
 }
 /* individual item cards */
-.item-card{
+.item-card,
+.add-task{
     display: flex;
     justify-content: space-between;
     padding: 0.5rem;
@@ -118,4 +119,21 @@
     width: 1rem;
     height: 1rem;
     cursor: pointer;
+}
+
+.add-task {
+    justify-content: center;
+}
+.add-task:hover {
+    justify-content: center;
+    background-color:#aeb59f;
+    cursor: pointer;
+}
+.add-task-left{
+    display: flex;
+    gap: 0.25rem;
+}
+.add-task-button {
+    width: 1rem;
+    height: 1rem;
 }
