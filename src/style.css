@@ -1,0 +1,121 @@
+* {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.project-container {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 45px auto;
+    grid-template-columns: 270px auto;
+}
+/* top bar */
+.top-bar {
+    grid-row: 1/2;
+    grid-column: 1/3;
+    background-color: #9DAD7F;
+    display: flex;
+}
+.top-bar-header {
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    gap: 20px;
+}
+/* left side nav bar */
+.left-side-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    background-color:#C7CFB7;
+    padding-top: 2rem;
+    gap: 1rem;
+}
+
+.inbox,
+.today,
+.upcoming {
+    padding-left: 1rem;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: space-between;
+}
+.projects-container >div{
+    padding: 1rem;
+}
+.left-nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+}
+.add-project-button {
+    width: 0.75rem;
+    height: 0.75rem;
+    cursor: pointer;
+}
+.expand-button {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+/* list of to do items */
+.todoitems-container {
+    width: 100%;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    text-align: center;
+    background-color: #F7F7E8;
+    display: flex;
+    justify-content: center;
+}
+/* container containing items to do */
+.items-container {
+    width: 50%;
+    padding: 2rem;
+}
+.current-project-header{
+    display: flex;
+}
+/* individual item cards */
+.item-card{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-top: 1px solid #C7CFB7;
+    border-bottom: 1px solid #C7CFB7;
+}
+
+.card-left {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.check-button {
+    width: 1rem;
+    height: 1rem;
+    background-color: #F7F7E8;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.check-button:hover {
+    background-color: #a7a797;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.buttons > img {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
