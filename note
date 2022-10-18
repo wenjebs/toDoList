@@ -1,12 +1,13 @@
 to implement the different pages eg inbox today upcoming
 can use the same as the previous project restaurant page (modules to load yah)
 
-to load the projects just set the innerhtml to my html lol
+stuff to implement :
+edit modal
+delete button functionality
+view details n priority
+functional tick button
 
-event listener on div
-open input
-get data
-input into factory/class
-(sth like library)
+
+title, details, date, priority
 
 

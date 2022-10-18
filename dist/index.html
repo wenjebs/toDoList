@@ -34,29 +34,8 @@
                         <button class="check-button"></button>
                         <div class="card-title">Project1</div>
                     </div>
-                    <div class="buttons">
-                        <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/edit.svg" alt="">
-                        <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/delete.svg" alt="">
-                    </div>
-                </div>
-
-                <div class="item-card">
-                    <div class="card-left">
-                        <button class="check-button"></button>
-                        <div class="card-title">Project2</div>
-                    </div>
-                    <div class="buttons">
-                        <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/edit.svg" alt="">
-                        <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/delete.svg" alt="">
-                    </div>
-                </div>
-
-                <div class="item-card">
-                    <div class="card-left">
-                        <button class="check-button"></button>
-                        <div class="card-title">Project3</div>
-                    </div>
-                    <div class="buttons">
+                    <div class="card-right">
+                        <div class="dueDate">date</div>
                         <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/edit.svg" alt="">
                         <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/delete.svg" alt="">
                     </div>
@@ -81,20 +60,21 @@
                 <div class="close-popup">x</div>
             </div>
             <form action="" class="form-container">
-                <input type="text" id="submit-title" placeholder="Title: Pay bills" required>
-                <input type="textarea" id="submit-details" placeholder="Details: e.g internet, phone, rent." required>
-                <input type="date" id="submit-date" required>
+                <input type="text" id="submit-title" name="submit-title" placeholder="Title: Pay bills" value='title' required>
+                <input type="textarea" id="submit-details" name="submit-details" placeholder="Details: e.g internet, phone, rent."value='details' required>
+                <input type="date" id="submit-date" name="submit-date"value='1200-12-12'>
                 <div class="priority-radio">
+                    <div class="priority-header">Priority: </div>
                     <div class="low-priority radio-wrapper">
-                        <input type="radio" id="low-priority" name="priority" value="low">
+                        <input type="radio" id="low-priority" name="submit-priority" value="low" checked>
                         <label for="low-priority">LOW</label>
                     </div>
                     <div class="medium-priority radio-wrapper">
-                        <input type="radio" id="medium-priority" name="priority" value="medium">
+                        <input type="radio" id="medium-priority" name="submit-priority" value="medium">
                         <label for="medium-priority">MEDIUM</label>
                     </div>
                     <div class="high-priority radio-wrapper">
-                        <input type="radio" id="high-priority" name="priority" value="high">
+                        <input type="radio" id="high-priority" name="submit-priority" value="high">
                         <label for="high-priority">HIGH</label>
                     </div>
                 </div>
