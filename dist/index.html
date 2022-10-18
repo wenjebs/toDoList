@@ -81,9 +81,24 @@
                 <div class="close-popup">x</div>
             </div>
             <form action="" class="form-container">
-                <input type="text" id="title" placeholder="Title: Pay bills">
-                <input type="textarea" id="details" placeholder="Details: e.g internet, phone, rent.">
-                <input type="submit" value="ADD TO DO">
+                <input type="text" id="submit-title" placeholder="Title: Pay bills" required>
+                <input type="textarea" id="submit-details" placeholder="Details: e.g internet, phone, rent." required>
+                <input type="date" id="submit-date" required>
+                <div class="priority-radio">
+                    <div class="low-priority radio-wrapper">
+                        <input type="radio" id="low-priority" name="priority" value="low">
+                        <label for="low-priority">LOW</label>
+                    </div>
+                    <div class="medium-priority radio-wrapper">
+                        <input type="radio" id="medium-priority" name="priority" value="medium">
+                        <label for="medium-priority">MEDIUM</label>
+                    </div>
+                    <div class="high-priority radio-wrapper">
+                        <input type="radio" id="high-priority" name="priority" value="high">
+                        <label for="high-priority">HIGH</label>
+                    </div>
+                </div>
+                <input type="submit" id='submit-task' value="ADD TO DO">
             </form> 
         </div>
     </div>
