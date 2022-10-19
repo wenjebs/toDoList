@@ -9,8 +9,7 @@ function checkboxVisual() {
             e.target.style.display = 'none';
             e.target.previousElementSibling.style.display = 'block';    
             e.target.nextElementSibling.style.textDecoration = 'none';
-        }
-        console.log(e.target)
+        }   
     });
 };
 

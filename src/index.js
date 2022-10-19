@@ -3,9 +3,10 @@ import modalPopUp from './modules/modal';
 import Task from './modules/task';
 import displayTask from './modules/displayTask';
 import checkboxVisual from './modules/checkboxVisual';
+import deleteButton from './modules/deleteButton';
 
-let tasks = [];
-
+window.tasks = [];
+let i = 0;
 // add task popup logic
 modalPopUp();
 
@@ -16,15 +17,18 @@ submitForm.addEventListener('submit', (e) => {
     let details = e.target['submit-details'].value;
     let date = e.target['submit-date'].value;
     let priority = e.target['submit-priority'].value;
-    let newTask = new Task(title, details, date , priority);
+    let index = i;
+    let newTask = new Task(title, details, date , priority, index);
     tasks.push(newTask);
     document.querySelector('.bg-modal').style.display = 'none';
-    console.log(tasks);
+    console.log(window.tasks);
     displayTask(title, date);
     e.preventDefault(); // prevent default page refresh
+    i++;
 });
 
 // checkbox ticking visual functionality
 checkboxVisual();
-
+// delete button functionality
+deleteButton();
 
