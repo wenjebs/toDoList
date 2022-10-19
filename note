@@ -3,21 +3,9 @@ can use the same as the previous project restaurant page (modules to load ya)
 
 stuff to implement :
 
-delete button functionality (array+visuals done)
-view details n priority
+edit button functionality - edit priority, date, title, details
 
-    functional tick button 
-    things to do:
-    visuals (done)
+details modal to be more sexy 
 
-
-
-title, details, date, priority
-
-
-details button:
-detail button > eventlistener > when click unhide a detail modal showing the title ... > 
-the detail modal need to be dynamically generated.
-
-high impt to implement display of details, generatedn
+different project tabs
 

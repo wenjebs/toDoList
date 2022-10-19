@@ -16,9 +16,7 @@ submitForm();
 checkboxVisual();
 // delete button functionality
 deleteButton();
-
 //open details modal fxn
 openDetailModal();
-
 //close detail modals fxn
 closeDetailModal();

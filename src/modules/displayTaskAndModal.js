@@ -1,5 +1,5 @@
 let i = 0;
-function displayTask(title, date, priority) {
+function displayTask(title,details, date, priority) {
     let bottom = document.querySelector('.add-task');
     let newTask = document.createElement('div');
     newTask.innerHTML = `
@@ -30,10 +30,10 @@ function displayTask(title, date, priority) {
         </div>
         <div class="close-popup" data-index=${i}>x</div>
         <div class="extra-content">
-            <div class="extra-title">Title: </div>
-            <div class="extra-details">Details: </div>
-            <div class="extra-priority">Priority: </div>
-            <div class="extra-due-date">Due on </div>
+            <div class="extra-title">Title: ${title}</div>
+            <div class="extra-details">Details: ${details}</div>
+            <div class="extra-priority">Priority: ${priority}</div>
+            <div class="extra-due-date">Due on ${date}</div>
         </div>`
 
     detailBgModal.appendChild(detailModalContent);

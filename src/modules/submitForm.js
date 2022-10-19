@@ -11,10 +11,12 @@ function submitForm() {
         let priority = e.target['submit-priority'].value;
         let index = i;
         let newTask = new Task(title, details, date , priority, index);
+
         tasks.push(newTask);
+        
         document.querySelector('.bg-modal').style.display = 'none';
         console.log(window.tasks);
-        displayTask(title, date, priority);
+        displayTask(title,details, date, priority);
         e.preventDefault(); // prevent default page refresh
         i++;
     });
