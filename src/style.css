@@ -118,7 +118,9 @@
 .check-button:hover {
     background-color: #a7a797;
 }
-
+.card-title {
+    cursor: pointer;
+}
 .card-right {
     display: flex;
     align-items: center;
@@ -156,10 +158,9 @@
     background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
     top: 0;
-    display: flex;
     justify-content: center;
     align-items: center;
-    /* display: none; */
+    display: none;
     backdrop-filter: blur(8px);
 }
 
@@ -255,3 +256,35 @@ input:focus-visible {
     transition: all 0.3s;
 }
 
+/* detail modal */
+.detail-bg-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    backdrop-filter: blur(8px);
+}
+
+.detail-modal-content {
+    width: 75%;
+    height: 600px;
+    background-color: white;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    display: none;
+}
+
+.extra-content {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4rem;
+    gap: 4rem;
+    font-size: xx-large;
+}

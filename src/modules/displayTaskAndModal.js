@@ -7,7 +7,7 @@ function displayTask(title, date, priority) {
         <div class="card-left">
             <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/checkboxEmpty.svg" alt="" class="checkbox-empty checkbox" data-index=${i}>
             <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/checkbox.svg" alt="" class="checkbox-tick checkbox" data-index=${i}>
-            <div class="card-title">${title}</div>
+            <div class="card-title" data-index=${i}>${title}</div>
         </div>
         <div class="card-right">
             <div class="priority">Priority: ${priority}</div>
@@ -19,6 +19,25 @@ function displayTask(title, date, priority) {
     `
     newTask.dataset.index = i;
     bottom.insertAdjacentElement('beforebegin', newTask);
+    
+    let detailBgModal = document.querySelector('.detail-bg-modal');
+    let detailModalContent = document.createElement('div');
+    detailModalContent.classList.add('detail-modal-content');
+    detailModalContent.dataset.index = i;
+    detailModalContent.innerHTML = `
+        <div class="modal-header">
+            <div class="modal-title">More information!</div>
+        </div>
+        <div class="close-popup" data-index=${i}>x</div>
+        <div class="extra-content">
+            <div class="extra-title">Title: </div>
+            <div class="extra-details">Details: </div>
+            <div class="extra-priority">Priority: </div>
+            <div class="extra-due-date">Due on </div>
+        </div>`
+
+    detailBgModal.appendChild(detailModalContent);
+
     i++;
 }
 

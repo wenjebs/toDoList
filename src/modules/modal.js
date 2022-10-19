@@ -13,10 +13,9 @@ function modalPopUp() {
         addTaskPopup.style.display = 'none';
     });
 
-    const keyboardListener = document.addEventListener('keydown', (e)=>{
+    document.addEventListener('keydown', (e)=>{
         if (e.key === 'Escape') {
             addTaskPopup.style.display = 'none';
-            
         }
     });
 };

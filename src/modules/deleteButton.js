@@ -2,7 +2,7 @@
 function deleteButton(){
     document.addEventListener('click', (e)=>{
         if(e.target.classList.contains('delete-button')){
-            let index = e.target.dataset.index
+            let index = e.target.dataset.index;
             let toBeDeletedParent = document.querySelector(`[data-index='${index}']`);
             toBeDeletedParent.remove();
             // delete task from array

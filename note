@@ -15,3 +15,9 @@ view details n priority
 title, details, date, priority
 
 
+details button:
+detail button > eventlistener > when click unhide a detail modal showing the title ... > 
+the detail modal need to be dynamically generated.
+
+high impt to implement display of details, generatedn
+
