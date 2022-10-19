@@ -97,15 +97,19 @@
 .card-left {
     display: flex;
     gap: 0.5rem;
+    align-items: center;
 }
 
-.check-button {
+.checkbox {
     width: 1rem;
     height: 1rem;
-    background-color: #F7F7E8;
-    border-radius: 5px;
     cursor: pointer;
 }
+
+.checkbox-tick {
+    display: none;
+}
+
 .check-button:hover {
     background-color: #a7a797;
 }
