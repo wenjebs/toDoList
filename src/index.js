@@ -5,6 +5,7 @@ import deleteButton from './modules/deleteButton';
 import submitForm from './modules/submitForm';
 import openDetailModal from './modules/openDetailModal';
 import closeDetailModal from './modules/closeDetailModal';
+import keyBoardFunction from './modules/keyBoardFunctionality';
 
 window.tasks = [];
 
@@ -20,3 +21,6 @@ deleteButton();
 openDetailModal();
 //close detail modals fxn
 closeDetailModal();
+
+//keyboard fxn
+keyBoardFunction();

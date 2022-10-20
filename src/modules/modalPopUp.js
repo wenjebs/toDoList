@@ -12,5 +12,11 @@ function modalPopUp() {
     addTaskClose.addEventListener('click', ()=> {
         addTaskPopup.style.display = 'none';
     });
+
+    document.addEventListener('keydown', (e)=>{
+        if (e.key === 'Escape') {
+            addTaskPopup.style.display = 'none';
+        }
+    });
 };
 export default modalPopUp
