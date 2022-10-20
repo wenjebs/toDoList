@@ -164,7 +164,8 @@
     backdrop-filter: blur(8px);
 }
 
-.modal-content {
+.modal-content,
+.edit-card-content {
     width: 75%;
     height: 600px;
     background-color: white;
@@ -174,7 +175,8 @@
 }
 
 
-.modal-header {
+.modal-header,
+.edit-card-header {
     background-color: #9DAD7F;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
@@ -184,12 +186,15 @@
     justify-content: space-between;
     align-items: center;
 }
-.modal-title {
+.modal-title,
+.edit-title {
     font-size: 2rem;
     padding-left: 1rem;
     color: white;
 }
-.close-popup {
+.close-popup,   
+.close-detail-popup,
+.close-edit-popup {
     position: absolute;
     right: 0.1rem;
     top: 0.8rem;
@@ -200,7 +205,8 @@
     line-height: 1rem;
 }
 
-.form-container {
+.form-container,
+.edit-form-container {
     margin: 4rem;
     display: flex;
     flex-direction: column;
@@ -208,13 +214,17 @@
 
 .form-container>
 input,
+input:focus-visible,
+.edit-form-container>
+input,
 input:focus-visible {
     border: none;
     outline: none;
     height: 3rem;
 }
 
-#submit-title {
+#submit-title,
+#edit-title {
     font-size: 1.6rem;
 }
 .priority-radio {
@@ -239,7 +249,8 @@ input:focus-visible {
 .radio-wrapper input:checked + label{
     font-weight: 900;
 }
-#submit-task {
+#submit-task,
+#edit-task {
     width: 10rem;
     background-color: white;
     color: #557174;
@@ -249,7 +260,8 @@ input:focus-visible {
     font-weight: bold;
 }
 
-#submit-task:hover{
+#submit-task:hover,
+#edit-task:hover{
     cursor: pointer;
     background-color: #557174;
     color:white;
@@ -287,4 +299,22 @@ input:focus-visible {
     padding: 4rem;
     gap: 4rem;
     font-size: xx-large;
+}
+
+/* edit card */
+
+.edit-card {
+    display:flex;
+    justify-content: center;
+    
+}
+.edit-card-content {
+    height: 15%;
+    width: 100%;
+    border: 1px solid black;
+
+}
+
+.edit-form-container {
+    margin: 1rem 5rem;
 }

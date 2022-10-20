@@ -1,5 +1,5 @@
 import Task from './taskConstruct';
-import displayTask from './displayTaskAndModal';
+import displayTask from './modal/displayTaskAndModal';
 let i = 0;
 //Submit task functionality
 function submitForm() {
