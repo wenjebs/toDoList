@@ -3,9 +3,27 @@ can use the same as the previous project restaurant page (modules to load ya)
 
 stuff to implement :
 
-edit button functionality - edit priority, date, title, details
+edit button functionality - edit priority, date, title, details DONE
 
 details modal to be more sexy 
 
 different project tabs
 
+
+
+project tabbing
+
+click the plus (eventlistener)
+
+open up aform to get project name
+
+append to dom 
+
+event listner to the project
+
+when click on that it shuld load its project page 
+    how to do that:
+    clear the page
+    load the title + add task button (omg.)
+    then function as usual (how to add task to each project page? WTF.)each project have its own array?
+    

@@ -43,12 +43,16 @@
     padding-left: 1rem;
 }
 
-.projects-container {
+.projects-header-container {
     display: flex;
     justify-content: space-between;
 }
-.projects-container >div{
+.projects-header-container >div{
     padding: 1rem;
+}
+.projects-header {
+    font-weight: 700;
+    font-size: x-large;
 }
 .left-nav-buttons {
     display: flex;
@@ -65,6 +69,25 @@
     width: 1rem;
     height: 1rem;
     cursor: pointer;
+}
+
+.projects-container {
+    padding: 1rem;
+}
+
+.input-project-formcontainer{
+    align-self: center;
+}
+.input-project-formcontainer>input {
+    border: none;
+    outline: none;
+    height: 3rem;
+}
+#submit-project-title{
+    cursor:pointer;
+}
+#submit-project-title:hover {
+    border:1px solid black;
 }
 /* list of to do items */
 .todoitems-container {
