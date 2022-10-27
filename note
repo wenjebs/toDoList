@@ -27,3 +27,6 @@ when click on that it shuld load its project page
     load the title + add task button (omg.)
     then function as usual (how to add task to each project page? WTF.)each project have its own array?
     
+initAddProjectButtons > Addproject popup + add project logic > add project to dom > initprojectbuttons > handleprojectbuttons> open project > load project > load tasks >display+  inittaskbuttons> submit task, 
+
+DELETE TASK EDIT TASK CHECK OFF TASK
