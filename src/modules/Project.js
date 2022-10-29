@@ -19,6 +19,9 @@ class Project {
     getTasks() {
         return this.tasks; 
     }
+    getTask(taskTitle) {
+        return this.tasks.find((task)=> task.title === taskTitle)
+    }
     deleteTask(taskTitle) {
         this.tasks = this.tasks.filter((task) => task.title !== taskTitle);
     }

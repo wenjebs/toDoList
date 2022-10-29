@@ -71,12 +71,17 @@ class UI {
 // eventlistener for the buttons within each task
     static initTaskButtons() {
         const cardLefts = document.querySelectorAll('.card-left');
-        cardLefts.forEach((cardLeft)=> {
+        cardLefts.forEach((cardLeft)=>{
             cardLeft.addEventListener('click', UI.handleTickButton);
         })
         const deleteButtons = document.querySelectorAll('.delete-button');
-        deleteButtons.forEach((deleteButton)=> {
+        deleteButtons.forEach((deleteButton)=>{
             deleteButton.addEventListener('click', UI.handleDeleteButton);
+        })
+
+        const cardTitles = document.querySelectorAll('.card-title');
+        cardTitles.forEach((cardTitle)=>{
+            cardTitle.addEventListener('click', UI.handleTitleButton);
         })
     }
     static handleTickButton(e) {
@@ -105,7 +110,45 @@ class UI {
         UI.clearTasks()
         UI.loadProjectContent(projectTitle);
     }
-
+    static handleTitleButton(e) {
+        const taskTitle = e.target.classList[1];
+                const projectTitle = document.querySelector('.current-project-header').textContent;
+                const currentProject = projects.find((project)=>project.getTitle() === projectTitle);
+                const currentTask = currentProject.getTask(taskTitle);
+                UI.showDetails(currentTask.title, currentTask.details, currentTask.date, currentTask.priority);
+    }
+    static showDetails(title, details, date, priority) {
+        const detailPopupModal = document.querySelector('.detail-bg-modal');
+            detailPopupModal.innerHTML =`
+            <div class='detail-modal-content'>
+                <div class="modal-header">
+                    <div class="modal-title">More information!</div>
+                </div>
+                <div class="close-detail-popup">x</div>
+                <div class="extra-content">
+                    <div class="extra-title">Title: ${title}</div>
+                    <div class="extra-details">Details: ${details}</div>
+                    <div class="extra-priority">Priority: ${priority}</div>
+                    <div class="extra-due-date">Due on ${date}</div>
+                </div>
+            </div>
+            `
+        detailPopupModal.style.display = 'flex'
+        UI.initCloseDetailPopupButton(detailPopupModal)
+    }
+    static initCloseDetailPopupButton(detailPopupModal) {
+        const closeButton = document.querySelector('.close-detail-popup')
+        closeButton.addEventListener('click', ()=>{
+            detailPopupModal.style.display = 'none';
+            detailPopupModal.innerHTML = '';
+        })
+        document.addEventListener('keydown', (e)=>{
+            if (e.key === 'Escape') {
+                detailPopupModal.style.display = 'none';
+                detailPopupModal.innerHTML = '';
+            }
+        })
+    }
 // EVENTLISTENER FOR ADD TASK BUTTON IN EACH PROJ
     static initAddTaskButtons() {
         const addTaskButton = document.querySelector('.add-task');
