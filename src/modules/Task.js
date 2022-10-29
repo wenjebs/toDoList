@@ -10,6 +10,7 @@ class Task {
     setTitle(title) {
         this.title = title;
     };
+    
     getTitle(){
         return this.title;
     }

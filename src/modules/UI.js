@@ -83,6 +83,11 @@ class UI {
         cardTitles.forEach((cardTitle)=>{
             cardTitle.addEventListener('click', UI.handleTitleButton);
         })
+
+        const editButtons = document.querySelectorAll('.edit-button');
+        editButtons.forEach((editButton)=>{
+            editButton.addEventListener('click', UI.handleEditButton)
+        })
     }
     static handleTickButton(e) {
         if (e.target.classList.contains('checkbox-empty')) {
@@ -110,29 +115,30 @@ class UI {
         UI.clearTasks()
         UI.loadProjectContent(projectTitle);
     }
+
     static handleTitleButton(e) {
         const taskTitle = e.target.classList[1];
-                const projectTitle = document.querySelector('.current-project-header').textContent;
-                const currentProject = projects.find((project)=>project.getTitle() === projectTitle);
-                const currentTask = currentProject.getTask(taskTitle);
-                UI.showDetails(currentTask.title, currentTask.details, currentTask.date, currentTask.priority);
+        const projectTitle = document.querySelector('.current-project-header').textContent;
+        const currentProject = projects.find((project)=>project.getTitle() === projectTitle);
+        const currentTask = currentProject.getTask(taskTitle);
+        UI.showDetails(currentTask.title, currentTask.details, currentTask.date, currentTask.priority);
     }
     static showDetails(title, details, date, priority) {
         const detailPopupModal = document.querySelector('.detail-bg-modal');
-            detailPopupModal.innerHTML =`
-            <div class='detail-modal-content'>
-                <div class="modal-header">
-                    <div class="modal-title">More information!</div>
-                </div>
-                <div class="close-detail-popup">x</div>
-                <div class="extra-content">
-                    <div class="extra-title">Title: ${title}</div>
-                    <div class="extra-details">Details: ${details}</div>
-                    <div class="extra-priority">Priority: ${priority}</div>
-                    <div class="extra-due-date">Due on ${date}</div>
-                </div>
+        detailPopupModal.innerHTML =`
+        <div class='detail-modal-content'>
+            <div class="modal-header">
+                <div class="modal-title">More information!</div>
             </div>
-            `
+            <div class="close-detail-popup">x</div>
+            <div class="extra-content">
+                <div class="extra-title">Title: ${title}</div>
+                <div class="extra-details">Details: ${details}</div>
+                <div class="extra-priority">Priority: ${priority}</div>
+                <div class="extra-due-date">Due on ${date}</div>
+            </div>
+        </div>
+        `
         detailPopupModal.style.display = 'flex'
         UI.initCloseDetailPopupButton(detailPopupModal)
     }
@@ -148,6 +154,97 @@ class UI {
                 detailPopupModal.innerHTML = '';
             }
         })
+    }
+// let taskTitle = e.target.parentElement.parentElement.querySelector('.card-title').textContent;
+// const projectTitle = document.querySelector('.current-project-header').textContent;
+// const currentProject = projects.find((project)=>project.getTitle() === projectTitle);
+// const currentTask = currentProject.getTask(taskTitle);
+    static handleEditButton(e) {
+        const itemCard = e.target.parentElement.parentElement
+        if (e.target.parentElement.parentElement.nextElementSibling) {
+            e.target.parentElement.parentElement.nextElementSibling.remove()
+        } else {
+            const editDetails = document.createElement('div');
+            editDetails.classList.add("edit-card");
+            editDetails.innerHTML = `
+                <div class="edit-card-content">
+                    <div class="edit-card-header">
+                        <div class="edit-title">Edit details</div>
+                        <div class="close-edit-popup">x</div>
+                    </div>
+                    <form action="" class="edit-form-container">
+                        <input type="text" id="edit-title" name="edit-title" placeholder="if have then put" value='dynamic' required>
+                        <input type="textarea" id="edit-details" name="edit-details" placeholder="if have then put" value='dynamic'>
+                        <input type="date" id="edit-date" name="edit-date" value='dynamic'>
+                        <div class="priority-radio">
+                            <div class="priority-header">Priority: </div>
+                            <div class="low-priority radio-wrapper">
+                                <input type="radio" id="low-priority" name="edit-priority" value="low" checked>
+                                <label for="low-priority">LOW</label>
+                            </div>
+                            <div class="medium-priority radio-wrapper">
+                                <input type="radio" id="medium-priority" name="edit-priority" value="medium">
+                                <label for="medium-priority">MEDIUM</label>
+                            </div>
+                            <div class="high-priority radio-wrapper">
+                                <input type="radio" id="high-priority" name="edit-priority" value="high">
+                                <label for="high-priority">HIGH</label>
+                            </div>
+                        </div>
+                        <input type="submit" id='submit-task' value="ADD TO DO">
+                    </form> 
+                </div>
+            `
+            itemCard.insertAdjacentElement('afterend', editDetails)
+            UI.initEditFormLogic(e)
+        }
+    }
+    static initEditFormLogic(e) {
+        const closePopup = document.querySelector('.close-edit-popup');
+        const editContainer = document.querySelector('.edit-card');
+        closePopup.addEventListener('click', ()=>{
+            editContainer.remove()
+        })
+        
+        const editForm = document.querySelector('.edit-form-container');
+        editForm.addEventListener('submit', UI.handleEditTaskInput);
+    }
+    static handleEditTaskInput(e) {
+        e.preventDefault();
+        const taskTitle = e.target.parentNode.parentNode.previousElementSibling.querySelector('.card-title').textContent;
+        const projectTitle = document.querySelector('.project-button.active').textContent
+        const currentProject = projects.find((project) => project.getTitle() === projectTitle);
+        const currentTask = currentProject.getTask(taskTitle);
+        let title = e.target['edit-title'].value;
+        let details = e.target['edit-details'].value;
+        let date = e.target['edit-date'].value;
+        let priority = e.target['edit-priority'].value;
+        UI.editTask(e, currentTask, title, details, date, priority)
+    }
+    static editTask(e, currentTask, title, details, date, priority) {
+        currentTask.title = title
+        currentTask.details = details
+        currentTask.date = date
+        currentTask.priority = priority
+        UI.displayEditedTask(e, title, date, priority);
+    }
+
+    static displayEditedTask(e, title, date, priority) {
+        const taskToBeEdited = e.target.parentNode.parentNode.previousElementSibling;
+        taskToBeEdited.innerHTML = `
+        <div class="card-left">
+                <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/checkboxEmpty.svg" alt="" class="checkbox-empty checkbox">
+                <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/checkbox.svg" alt="" class="checkbox-tick checkbox">
+                <div class="card-title ${title}">${title}</div>
+            </div>
+        <div class="card-right">
+            <div class="priority">${priority}</div>
+            <div class="dueDate">${date}</div>
+            <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/edit.svg" alt="" class="edit-button">
+            <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/delete.svg" alt="" class="delete-button">
+        </div>`
+        e.target.parentNode.parentNode.remove()
+        UI.initTaskButtons();
     }
 // EVENTLISTENER FOR ADD TASK BUTTON IN EACH PROJ
     static initAddTaskButtons() {
@@ -167,7 +264,7 @@ class UI {
     static handleInput(e) {
         e.preventDefault();
         const projectTitle = document.querySelector('.project-button.active').textContent
-        const currentProject = projects.filter((project) => project.getTitle() === projectTitle)[0];
+        const currentProject = projects.find((project) => project.getTitle() === projectTitle);
         const addTaskPopup = document.querySelector('.bg-modal');
         let title = e.target['submit-title'].value;
         let details = e.target['submit-details'].value;
