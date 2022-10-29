@@ -1,7 +1,48 @@
 import Project from './Project';
 import Task from './Task';
-let projects = [];
+import ToDoList from './ToDoList';
+
+let Projects = new ToDoList()
+localStorage.setItem('todolist', JSON.stringify(Projects))
 class UI {
+// EVENTLISTENER FOR ADD PROJECT BUTTON
+    static initAddProjectButtons() {
+        const addProjectButton = document.querySelector('.add-project-button');
+        const submitProjectPopupInput = document.querySelector('#submit-project-title');
+        addProjectButton.addEventListener('click', UI.openAddProjectPopup)
+        submitProjectPopupInput.addEventListener('click', UI.addProject)
+    }
+    static openAddProjectPopup() {
+        const addProjectPopup = document.querySelector('.input-project-formcontainer');
+        if (addProjectPopup.style.display === 'block') {
+            addProjectPopup.style.display = 'none';
+        } else {
+            addProjectPopup.style.display = 'block';
+        }
+    }
+    static addProject() {
+        const addProjectPopup = document.querySelector('.input-project-formcontainer');
+        const inputProjectTitle = document.getElementById('input-project-title')
+        const projectTitle = inputProjectTitle.value
+        if (projectTitle==='') {
+            alert('Project title cant be empty');
+            return
+        }
+        let titles = Projects.getProjects().map(project => {return project.getTitle()})
+        if (titles.includes(projectTitle)) {
+            alert('Cant have same name')
+            return
+        }
+        UI.createProjectTitleDOM(projectTitle);
+        Projects.addProject(new Project(projectTitle));
+        addProjectPopup.style.display = 'none';
+        addProjectPopup.querySelector('input').value = '';
+    }
+    static createProjectTitleDOM(projectTitle) {
+        const projectTitlesContainer = document.querySelector('.projects-container');
+        projectTitlesContainer.innerHTML += `<div id="${projectTitle}" class="project-button">${projectTitle}</div>`
+        UI.initProjectButtons()
+    }
 // EVENTLISTENERS FOR EACH PROJECT
     static initProjectButtons() {
         const projectButtons = document.querySelectorAll('.project-button');
@@ -20,9 +61,6 @@ class UI {
         UI.openProject(projectTitle)
     }
     static openProject(projectTitle, projectButton) {
-        // select all buttons and set to non active
-        // close all project popups
-        // LOAD Project content
         UI.loadProjectContent(projectTitle)
     }
     static loadProjectContent(projectTitle) {
@@ -41,14 +79,12 @@ class UI {
         UI.loadTasks(projectTitle);
     }
     static loadTasks(projectTitle){
-        const projectToBeLoaded = projects.find((project)=>project.getTitle() === projectTitle);
+        const projectToBeLoaded = Projects.getProject(projectTitle)
         projectToBeLoaded.getTasks().forEach((task)=>{
             UI.displayTask(task.title, task.date, task.priority)
         })
         UI.initAddTaskButtons(projectTitle);
     }
-
-// display any present tasks
     static displayTask(title, date, priority) {
         const taskList = document.querySelector('.task-list');
         taskList.innerHTML += `
@@ -89,6 +125,7 @@ class UI {
             editButton.addEventListener('click', UI.handleEditButton)
         })
     }
+
     static handleTickButton(e) {
         if (e.target.classList.contains('checkbox-empty')) {
             e.target.style.display = 'none';
@@ -108,9 +145,7 @@ class UI {
     static handleDeleteButton(e) {
         const taskTitle = e.target.parentElement.previousElementSibling.querySelector('.card-title').textContent
         const projectTitle = document.querySelector('.current-project-header').textContent
-        const currentProject = projects.find((project)=>{
-            return project.getTitle() === projectTitle
-        });
+        const currentProject = Projects.getProject(projectTitle)
         currentProject.deleteTask(taskTitle);
         UI.clearTasks()
         UI.loadProjectContent(projectTitle);
@@ -119,7 +154,7 @@ class UI {
     static handleTitleButton(e) {
         const taskTitle = e.target.classList[1];
         const projectTitle = document.querySelector('.current-project-header').textContent;
-        const currentProject = projects.find((project)=>project.getTitle() === projectTitle);
+        const currentProject = Projects.getProject(projectTitle)
         const currentTask = currentProject.getTask(taskTitle);
         UI.showDetails(currentTask.title, currentTask.details, currentTask.date, currentTask.priority);
     }
@@ -155,10 +190,7 @@ class UI {
             }
         })
     }
-// let taskTitle = e.target.parentElement.parentElement.querySelector('.card-title').textContent;
-// const projectTitle = document.querySelector('.current-project-header').textContent;
-// const currentProject = projects.find((project)=>project.getTitle() === projectTitle);
-// const currentTask = currentProject.getTask(taskTitle);
+
     static handleEditButton(e) {
         const itemCard = e.target.parentElement.parentElement
         if (e.target.parentElement.parentElement.nextElementSibling) {
@@ -213,7 +245,7 @@ class UI {
         e.preventDefault();
         const taskTitle = e.target.parentNode.parentNode.previousElementSibling.querySelector('.card-title').textContent;
         const projectTitle = document.querySelector('.project-button.active').textContent
-        const currentProject = projects.find((project) => project.getTitle() === projectTitle);
+        const currentProject = Projects.getProject(projectTitle)
         const currentTask = currentProject.getTask(taskTitle);
         let title = e.target['edit-title'].value;
         let details = e.target['edit-details'].value;
@@ -228,7 +260,6 @@ class UI {
         currentTask.priority = priority
         UI.displayEditedTask(e, title, date, priority);
     }
-
     static displayEditedTask(e, title, date, priority) {
         const taskToBeEdited = e.target.parentNode.parentNode.previousElementSibling;
         taskToBeEdited.innerHTML = `
@@ -264,7 +295,7 @@ class UI {
     static handleInput(e) {
         e.preventDefault();
         const projectTitle = document.querySelector('.project-button.active').textContent
-        const currentProject = projects.find((project) => project.getTitle() === projectTitle);
+        const currentProject = Projects.getProject(projectTitle)
         const addTaskPopup = document.querySelector('.bg-modal');
         let title = e.target['submit-title'].value;
         let details = e.target['submit-details'].value;
@@ -286,42 +317,6 @@ class UI {
         }
     }
 
-// EVENTLISTENER FOR ADD PROJECT BUTTON
-    static initAddProjectButtons() {
-        const addProjectButton = document.querySelector('.add-project-button');
-        const submitProjectPopupInput = document.querySelector('#submit-project-title');
-        addProjectButton.addEventListener('click', UI.openAddProjectPopup)
-        submitProjectPopupInput.addEventListener('click', UI.addProject)
-    }
-    static openAddProjectPopup() {
-        const addProjectPopup = document.querySelector('.input-project-formcontainer');
-        if (addProjectPopup.style.display === 'block') {
-            addProjectPopup.style.display = 'none';
-        } else {
-            addProjectPopup.style.display = 'block';
-        }
-    }
-    static addProject() {
-        const inputProjectTitle = document.getElementById('input-project-title')
-        const projectTitle = inputProjectTitle.value
-        if (projectTitle==='') {
-            alert('Project title cant be empty');
-            return
-        }
-        let titles = projects.map(project => {return project.getTitle()})
-        if (titles.includes(projectTitle)) {
-            alert('Cant have same name')
-            return
-        }
-        UI.createProjectTitleDOM(projectTitle);
-        projects.push(new Project(projectTitle));
-        console.log(projects);
-    }
-    static createProjectTitleDOM(projectTitle) {
-        const projectTitlesContainer = document.querySelector('.projects-container');
-        projectTitlesContainer.innerHTML += `<div id="${projectTitle}" class="project-button">${projectTitle}</div>`
-        UI.initProjectButtons()
-    }
     static clearTasks() {
         let tasksContainer = document.querySelector('.todoitems-container')
         tasksContainer.innerHTML = '';
