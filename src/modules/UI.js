@@ -19,14 +19,12 @@ class UI {
         console.log(e.target)
         UI.openProject(projectTitle)
     }
-
     static openProject(projectTitle, projectButton) {
         // select all buttons and set to non active
         // close all project popups
         // LOAD Project content
         UI.loadProjectContent(projectTitle)
     }
-
     static loadProjectContent(projectTitle) {
         const toDoItemsContainer = document.querySelector('.todoitems-container');
         toDoItemsContainer.innerHTML = `
@@ -49,6 +47,7 @@ class UI {
         })
         UI.initAddTaskButtons(projectTitle);
     }
+
 // display any present tasks
     static displayTask(title, date, priority) {
         const taskList = document.querySelector('.task-list');
@@ -68,6 +67,7 @@ class UI {
         </div>`
         UI.initTaskButtons()
     }
+
 // eventlistener for the buttons within each task
     static initTaskButtons() {
         const cardLefts = document.querySelectorAll('.card-left');
@@ -105,14 +105,20 @@ class UI {
         UI.clearTasks()
         UI.loadProjectContent(projectTitle);
     }
+
 // EVENTLISTENER FOR ADD TASK BUTTON IN EACH PROJ
     static initAddTaskButtons() {
         const addTaskButton = document.querySelector('.add-task');
         const addTaskPopup = document.querySelector('.bg-modal');
         const addTaskForm = document.querySelector('.form-container');
+        const closeTaskPopup = document.querySelector('.close-popup');
         addTaskButton.addEventListener('click', ()=>{
-            addTaskPopup.style.display = 'flex'
+            addTaskPopup.style.display = 'flex';
         });
+        closeTaskPopup.addEventListener('click', ()=>{
+            addTaskPopup.style.display = 'none';
+        });
+        addTaskPopup.addEventListener('keydown', UI.closeTaskPopupWithKeyboard)
         addTaskForm.addEventListener('submit', UI.handleInput)
     }   
     static handleInput(e) {
@@ -133,6 +139,13 @@ class UI {
         addTaskPopup.style.display = 'none';
         UI.displayTask(title, date, priority);
     }
+    static closeTaskPopupWithKeyboard(e) {
+        const addTaskPopup = document.querySelector('.bg-modal');
+        if (e.key === 'Escape') {
+            addTaskPopup.style.display = 'none';
+        }
+    }
+
 // EVENTLISTENER FOR ADD PROJECT BUTTON
     static initAddProjectButtons() {
         const addProjectButton = document.querySelector('.add-project-button');
@@ -140,7 +153,6 @@ class UI {
         addProjectButton.addEventListener('click', UI.openAddProjectPopup)
         submitProjectPopupInput.addEventListener('click', UI.addProject)
     }
-
     static openAddProjectPopup() {
         const addProjectPopup = document.querySelector('.input-project-formcontainer');
         if (addProjectPopup.style.display === 'block') {
@@ -149,7 +161,6 @@ class UI {
             addProjectPopup.style.display = 'block';
         }
     }
-
     static addProject() {
         const inputProjectTitle = document.getElementById('input-project-title')
         const projectTitle = inputProjectTitle.value
@@ -166,13 +177,11 @@ class UI {
         projects.push(new Project(projectTitle));
         console.log(projects);
     }
-
     static createProjectTitleDOM(projectTitle) {
         const projectTitlesContainer = document.querySelector('.projects-container');
         projectTitlesContainer.innerHTML += `<div id="${projectTitle}" class="project-button">${projectTitle}</div>`
         UI.initProjectButtons()
     }
-
     static clearTasks() {
         let tasksContainer = document.querySelector('.todoitems-container')
         tasksContainer.innerHTML = '';
