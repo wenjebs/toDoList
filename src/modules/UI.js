@@ -1,10 +1,37 @@
 import Project from './Project';
 import Task from './Task';
 import ToDoList from './ToDoList';
+import { isToday, parseISO } from 'date-fns'
 
 let Projects = new ToDoList()
 localStorage.setItem('todolist', JSON.stringify(Projects))
 class UI {
+// EVENTLISTENER FOR TODAY BUTTON
+    static initTodayButton() {
+        const todayButton = document.querySelector('.today');
+        todayButton.addEventListener('click', UI.handleTodayButton);
+    }
+    static handleTodayButton() {
+        const toDoItemsContainer = document.querySelector('.todoitems-container');
+        toDoItemsContainer.innerHTML = `
+        <div class="items-container">
+            <div class="current-project-header">Today</div>
+            <div class="task-list"></div>
+            </div>
+        </div>`
+        UI.loadTodaysTasks()
+    }
+    static loadTodaysTasks() {
+        Projects.getProjects().forEach((project)=>{
+            project.getTasks().forEach((task)=>{
+                let check = isToday(parseISO(task.date))
+                if (check) {
+                    UI.displayTask(task.title, task.date, task.priority)
+                }
+
+            })
+        })
+    }
 // EVENTLISTENER FOR ADD PROJECT BUTTON
     static initAddProjectButtons() {
         const addProjectButton = document.querySelector('.add-project-button');
