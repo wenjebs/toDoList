@@ -6,7 +6,7 @@ import { isToday, parseISO } from 'date-fns'
 const Projects = new ToDoList()
 localStorage.setItem('todolist', JSON.stringify(Projects))
 class UI {
-// EVENTLISTENER FOR TODAY BUTTON
+  // EVENTLISTENER FOR TODAY BUTTON
   static initTodayButton () {
     const todayButton = document.querySelector('.today')
     todayButton.addEventListener('click', UI.handleTodayButton)
@@ -37,13 +37,17 @@ class UI {
   // EVENTLISTENER FOR ADD PROJECT BUTTON
   static initAddProjectButtons () {
     const addProjectButton = document.querySelector('.add-project-button')
-    const submitProjectPopupInput = document.querySelector('#submit-project-title')
+    const submitProjectPopupInput = document.querySelector(
+      '#submit-project-title'
+    )
     addProjectButton.addEventListener('click', UI.openAddProjectPopup)
     submitProjectPopupInput.addEventListener('click', UI.addProject)
   }
 
   static openAddProjectPopup () {
-    const addProjectPopup = document.querySelector('.input-project-formcontainer')
+    const addProjectPopup = document.querySelector(
+      '.input-project-formcontainer'
+    )
     if (addProjectPopup.style.display === 'block') {
       addProjectPopup.style.display = 'none'
     } else {
@@ -52,14 +56,18 @@ class UI {
   }
 
   static addProject () {
-    const addProjectPopup = document.querySelector('.input-project-formcontainer')
+    const addProjectPopup = document.querySelector(
+      '.input-project-formcontainer'
+    )
     const inputProjectTitle = document.getElementById('input-project-title')
     const projectTitle = inputProjectTitle.value
     if (projectTitle === '') {
       alert('Project title cant be empty')
       return
     }
-    const titles = Projects.getProjects().map(project => { return project.getTitle() })
+    const titles = Projects.getProjects().map((project) => {
+      return project.getTitle()
+    })
     if (titles.includes(projectTitle)) {
       alert('Cant have same name')
       return
@@ -71,7 +79,9 @@ class UI {
   }
 
   static createProjectTitleDOM (projectTitle) {
-    const projectTitlesContainer = document.querySelector('.projects-container')
+    const projectTitlesContainer = document.querySelector(
+      '.projects-container'
+    )
     projectTitlesContainer.innerHTML += `<div id="${projectTitle}" class="project-button">${projectTitle}</div>`
     UI.initProjectButtons()
   }
@@ -168,7 +178,8 @@ class UI {
     if (e.target.classList.contains('checkbox-empty')) {
       e.target.style.display = 'none'
       e.target.nextElementSibling.style.display = 'block'
-      e.target.nextElementSibling.nextElementSibling.style.textDecoration = 'line-through'
+      e.target.nextElementSibling.nextElementSibling.style.textDecoration =
+        'line-through'
       const parent = e.target.parentElement.parentElement
       parent.style.opacity = '0.3'
     }
@@ -182,8 +193,13 @@ class UI {
   }
 
   static handleDeleteButton (e) {
-    const taskTitle = e.target.parentElement.previousElementSibling.querySelector('.card-title').textContent
-    const projectTitle = document.querySelector('.current-project-header').textContent
+    const taskTitle =
+      e.target.parentElement.previousElementSibling.querySelector(
+        '.card-title'
+      ).textContent
+    const projectTitle = document.querySelector(
+      '.current-project-header'
+    ).textContent
     const currentProject = Projects.getProject(projectTitle)
     currentProject.deleteTask(taskTitle)
     UI.clearTasks()
@@ -192,10 +208,17 @@ class UI {
 
   static handleTitleButton (e) {
     const taskTitle = e.target.classList[1]
-    const projectTitle = document.querySelector('.current-project-header').textContent
+    const projectTitle = document.querySelector(
+      '.current-project-header'
+    ).textContent
     const currentProject = Projects.getProject(projectTitle)
     const currentTask = currentProject.getTask(taskTitle)
-    UI.showDetails(currentTask.title, currentTask.details, currentTask.date, currentTask.priority)
+    UI.showDetails(
+      currentTask.title,
+      currentTask.details,
+      currentTask.date,
+      currentTask.priority
+    )
   }
 
   static showDetails (title, details, date, priority) {
@@ -286,8 +309,13 @@ class UI {
 
   static handleEditTaskInput (e) {
     e.preventDefault()
-    const taskTitle = e.target.parentNode.parentNode.previousElementSibling.querySelector('.card-title').textContent
-    const projectTitle = document.querySelector('.project-button.active').textContent
+    const taskTitle =
+      e.target.parentNode.parentNode.previousElementSibling.querySelector(
+        '.card-title'
+      ).textContent
+    const projectTitle = document.querySelector(
+      '.project-button.active'
+    ).textContent
     const currentProject = Projects.getProject(projectTitle)
     const currentTask = currentProject.getTask(taskTitle)
     const title = e.target['edit-title'].value
@@ -306,7 +334,8 @@ class UI {
   }
 
   static displayEditedTask (e, title, date, priority) {
-    const taskToBeEdited = e.target.parentNode.parentNode.previousElementSibling
+    const taskToBeEdited =
+      e.target.parentNode.parentNode.previousElementSibling
     taskToBeEdited.innerHTML = `
         <div class="card-left">
                 <img src="https://raw.githubusercontent.com/YipAnthony/betterToDoList/5106fb718a054940bf41781a3a5d6e4aa498b9a0/dist/images/checkboxEmpty.svg" alt="" class="checkbox-empty checkbox">
@@ -341,7 +370,9 @@ class UI {
 
   static handleInput (e) {
     e.preventDefault()
-    const projectTitle = document.querySelector('.project-button.active').textContent
+    const projectTitle = document.querySelector(
+      '.project-button.active'
+    ).textContent
     const currentProject = Projects.getProject(projectTitle)
     const addTaskPopup = document.querySelector('.bg-modal')
     const title = e.target['submit-title'].value
