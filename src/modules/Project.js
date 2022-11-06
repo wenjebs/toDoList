@@ -1,37 +1,37 @@
 // Project constructor
 class Project {
-  constructor (title) {
-    this.title = title
-    this.tasks = []
+  constructor(title) {
+    this.title = title;
+    this.tasks = [];
   }
 
-  getTitle () {
-    return this.title
+  getTitle() {
+    return this.title;
   }
 
-  setTitle (title) {
-    this.title = title
+  setTitle(title) {
+    this.title = title;
   }
 
-  contains (taskName) {
-    return this.tasks.some((task) => task.getTitle() === taskName)
+  contains(taskName) {
+    return this.tasks.some((task) => task.getTitle() === taskName);
   }
 
-  addTask (newTask) {
-    this.tasks.push(newTask)
+  addTask(newTask) {
+    this.tasks.push(newTask);
   }
 
-  getTasks () {
-    return this.tasks
+  getTasks() {
+    return this.tasks;
   }
 
-  getTask (taskTitle) {
-    return this.tasks.find((task) => task.title === taskTitle)
+  getTask(taskTitle) {
+    return this.tasks.find((task) => task.title === taskTitle);
   }
 
-  deleteTask (taskTitle) {
-    this.tasks = this.tasks.filter((task) => task.title !== taskTitle)
+  deleteTask(taskTitle) {
+    this.tasks = this.tasks.filter((task) => task.title !== taskTitle);
   }
 }
 
-export default Project
+export default Project;

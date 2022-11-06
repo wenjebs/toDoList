@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="project-container">
-        <div class="top-bar">
-            <h1 class="top-bar-header">Stuff to do!!!</h1>
+      <div class="top-bar">
+        <h1 class="top-bar-header">Stuff to do!!!</h1>
+      </div>
+      <div class="left-side-nav">
+        <div class="today">today</div>
+        <div class="projects-header-container">
+          <div class="projects-header" id="projects-header">projects</div>
+          <div class="left-nav-buttons">
+            <img src="images/plus.svg" alt="" class="add-project-button" />
+          </div>
         </div>
-        <div class="left-side-nav">
-            <div class="today">today</div>
-            <div class="projects-header-container">
-                    <div class="projects-header" id="projects-header">projects</div>
-                    <div class="left-nav-buttons">
-                        <img src="images/plus.svg" alt="" class="add-project-button">
-                    </div>
-            </div>
-            <div class="projects-container">
-                <!-- <div id="hi" class="project-button">hi</div> -->
-            </div>
-            <div action="" class="input-project-formcontainer">
-                <input type="text" id="input-project-title" placeholder="Project Title: e.g Gym" name="input-project-title" required>
-                <button id="submit-project-title">Submit</button>
-            </div>
+        <div class="projects-container">
+          <!-- <div id="hi" class="project-button">hi</div> -->
         </div>
+        <div action="" class="input-project-formcontainer">
+          <input
+            type="text"
+            id="input-project-title"
+            placeholder="Project Title: e.g Gym"
+            name="input-project-title"
+            required
+          />
+          <button id="submit-project-title">Submit</button>
+        </div>
+      </div>
 
-
-
-        <div class="todoitems-container"> 
-                <!-- <div class="items-container">
+      <div class="todoitems-container">
+        <!-- <div class="items-container">
                     <div class="current-project-header">Today</div>
                     <div class="item-card">
                         <div class="card-left">
@@ -53,43 +57,78 @@
                         </div>
                     </div>
                 </div> -->
-        </div>
+      </div>
     </div>
 
     <!-- modal add task section -->
 
     <div class="bg-modal">
-        <div class="modal-content">
-                <div class="modal-header">
-                    <div class="modal-title">Add a new task</div>
-                    <div class="close-popup">x</div>
-                </div>
-            <form action="" class="form-container">
-                <input type="text" id="submit-title" name="submit-title" placeholder="Title: Pay bills" value='title' required>
-                <input type="textarea" id="submit-details" name="submit-details" placeholder="Details: e.g internet, phone, rent."value='details' required>
-                <input type="date" id="submit-date" name="submit-date"value='1200-12-12'>
-                <div class="priority-radio">
-                    <div class="priority-header">Priority: </div>
-                    <div class="low-priority radio-wrapper">
-                        <input type="radio" id="low-priority" name="submit-priority" value="low" checked>
-                        <label for="low-priority">LOW</label>
-                    </div>
-                    <div class="medium-priority radio-wrapper">
-                        <input type="radio" id="medium-priority" name="submit-priority" value="medium">
-                        <label for="medium-priority">MEDIUM</label>
-                    </div>
-                    <div class="high-priority radio-wrapper">
-                        <input type="radio" id="high-priority" name="submit-priority" value="high">
-                        <label for="high-priority">HIGH</label>
-                    </div>
-                </div>
-                <input type="submit" id='submit-task' value="ADD TO DO">
-            </form> 
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">Add a new task</div>
+          <div class="close-popup">x</div>
         </div>
+        <form action="" class="form-container">
+          <input
+            type="text"
+            id="submit-title"
+            name="submit-title"
+            placeholder="Title: Pay bills"
+            value="title"
+            required
+          />
+          <input
+            type="textarea"
+            id="submit-details"
+            name="submit-details"
+            placeholder="Details: e.g internet, phone, rent."
+            value="details"
+            required
+          />
+          <input
+            type="date"
+            id="submit-date"
+            name="submit-date"
+            value="1200-12-12"
+          />
+          <div class="priority-radio">
+            <div class="priority-header">Priority:</div>
+            <div class="low-priority radio-wrapper">
+              <input
+                type="radio"
+                id="low-priority"
+                name="submit-priority"
+                value="low"
+                checked
+              />
+              <label for="low-priority">LOW</label>
+            </div>
+            <div class="medium-priority radio-wrapper">
+              <input
+                type="radio"
+                id="medium-priority"
+                name="submit-priority"
+                value="medium"
+              />
+              <label for="medium-priority">MEDIUM</label>
+            </div>
+            <div class="high-priority radio-wrapper">
+              <input
+                type="radio"
+                id="high-priority"
+                name="submit-priority"
+                value="high"
+              />
+              <label for="high-priority">HIGH</label>
+            </div>
+          </div>
+          <input type="submit" id="submit-task" value="ADD TO DO" />
+        </form>
+      </div>
     </div>
 
     <!-- details modal -->
     <div class="detail-bg-modal"></div>
-</body>
-<script src="main.js" defer></script>
+  </body>
+  <script src="main.js" defer></script>
 </html>
